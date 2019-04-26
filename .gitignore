@@ -1,22 +1,21 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 
-his .gitignore file should be placed at the root of your Unity project directory
+#This .gitignore file should be placed at the root of your Unity project directory
 
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
+/Library/
+/Temp/
+/obj/
+/Builds/
+/Logs/
 
 # Never ignore Asset meta data
-!/[Aa]ssets/**/*.meta
+!/Assets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
-# /[Aa]ssets/AssetStoreTools*
+# /Assets/AssetStoreTools*
 
 # TextMesh Pro files
-[Aa]ssets/TextMesh*Pro/
+/Assets/TextMesh*Pro/
 
 # Visual Studio cache directory
 .vs/
