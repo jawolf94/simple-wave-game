@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public Text experienceText;
     public Text levelText;
     public Text HealthText;
+    public Text LightActionText; 
 
     public GameObject primaryPanel;
     public GameObject secondaryPanel;
@@ -18,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     private Player playerInfo;
     private ExpTracker expTracker;
     private InventoryTracker invTracker;
+
+    private FireWeapon fireWeapon;
 
 
     // Start is called before the first frame update
@@ -30,11 +33,17 @@ public class PlayerManager : MonoBehaviour
         playerInfo = createComponent<Player>();
         playerInfo.Init(startingHealth, 0, HealthText);
 
+        //Set up Exp Tracker
         expTracker = createComponent<ExpTracker>();
         expTracker.Init(experienceText, levelText);
 
+        //Set Up Inventroy Tracker
         invTracker = createComponent<InventoryTracker>();
-        invTracker.Init(primaryPanel, secondaryPanel);
+        invTracker.Init(this, primaryPanel, secondaryPanel, LightActionText);
+
+        //Get Weapon Controls
+        fireWeapon = GetComponent<FireWeapon>();
+        ToggleShot(true);
     }
 
     private T createComponent<T>() where T: Component 
@@ -59,6 +68,10 @@ public class PlayerManager : MonoBehaviour
 
     public Player GetPlayerInfo() {
         return playerInfo;
+    }
+
+    public void ToggleShot(bool onOff) {
+        fireWeapon.ShotEnabled = onOff;
     }
 
 }

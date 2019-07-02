@@ -9,6 +9,9 @@ public class FireWeapon : MonoBehaviour
     public float ShotRange;
     public float ShotDamage;
 
+    //True is player can fire primary weapon
+    public bool ShotEnabled { get; set; }
+
     //Private vars for displaying shots    
     private LineRenderer shotLine;
     private int shootableMask;
@@ -40,9 +43,11 @@ public class FireWeapon : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= CoolDown)
-        {
-            fire();
+        if (ShotEnabled) {
+            if (Input.GetButton("Fire1") && timer >= CoolDown)
+            {
+                fire();
+            }
         }
 
         if (timer >= CoolDown * shotDisplayTime)

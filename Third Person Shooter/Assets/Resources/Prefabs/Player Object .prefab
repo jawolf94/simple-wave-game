@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 5808351135942169366}
   - component: {fileID: 5808351135942169353}
   - component: {fileID: 5808351135942169359}
+  - component: {fileID: 5808351135942169358}
   - component: {fileID: 5808351135942169352}
   - component: {fileID: 5808351135942169354}
   - component: {fileID: 5808351135942169365}
   - component: {fileID: 5808351135942169355}
   - component: {fileID: 5808351135942169364}
-  - component: {fileID: 5808351135942169358}
   m_Layer: 10
   m_Name: 'Player Object '
   m_TagString: Player
@@ -69,6 +69,24 @@ MonoBehaviour:
   CoolDown: 0.2
   ShotRange: 100
   ShotDamage: 1
+--- !u!114 &5808351135942169358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1acc641d4f5e464dadd110252ada0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 10
+  experienceText: {fileID: 0}
+  levelText: {fileID: 0}
+  HealthText: {fileID: 0}
+  primaryPanel: {fileID: 0}
+  secondaryPanel: {fileID: 0}
 --- !u!120 &5808351135942169352
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -238,20 +256,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5808351135942169358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5808351135942169367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1acc641d4f5e464dadd110252ada0e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 10
-  experienceText: {fileID: 0}
-  levelText: {fileID: 0}
-  primaryPanel: {fileID: 0}
-  secondaryPanel: {fileID: 0}

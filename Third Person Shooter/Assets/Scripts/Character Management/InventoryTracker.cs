@@ -7,7 +7,8 @@ public class InventoryTracker : MonoBehaviour
 {
     public Item SelectedPrimary;
     public Item SelectedSeconday;
-    
+
+    private PlayerManager activePlayerManager; 
     private List<Item> primaryWeapons;
     private List<Item> secondaryItems;
 
@@ -22,21 +23,84 @@ public class InventoryTracker : MonoBehaviour
 
     private ColorBlock selectedBlock;
 
+    private bool lightInRange;
+    private Text lightActionText;
+
+    private GameObject heldLight;
+    private GameObject nearbyLight;
+
+    private static string pickUpText = "[RC] to Pick Up Light";
+    private static string dropText = "[RC] to Drop Light";
+
     private bool isInitalized = false; 
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {   
 
     }
 
+    public void Init(PlayerManager callingManager, GameObject primaryPanel, GameObject secondaryPanel, Text lightText)
+    {
+
+        this.activePlayerManager = callingManager;
+
+        primaryButtons = new List<GameObject>();
+        secondaryButtons = new List<GameObject>();
+
+        foreach (Button b in primaryPanel.GetComponentsInChildren<Button>())
+        {
+            addButtonToPanel(b, primaryButtons);
+        }
+
+        foreach (Button b in secondaryPanel.GetComponentsInChildren<Button>())
+        {
+            addButtonToPanel(b, secondaryButtons);
+        }
+
+        primarySize = primaryButtons.Count;
+        secondarySize = secondaryButtons.Count;
+
+        primaryWeapons = new List<Item>();
+        secondaryItems = new List<Item>();
+
+
+        primaryIndex = 0;
+        secondaryIndex = 0;
+
+        //Temp Code serving as a placeholder for real items
+
+        Item testPrimary = new Item("Test P1");
+        AddItemToPrimary(testPrimary);
+
+
+        Item testSecondary = new Item("Test S1");
+        AddItemToSecondary(testSecondary);
+
+        SelectedPrimary = primaryWeapons[primaryIndex];
+        SelectedSeconday = secondaryItems[secondaryIndex];
+
+        selectedBlock = ColorBlock.defaultColorBlock;
+        selectedBlock.normalColor = Color.yellow;
+
+        setButtonColorSelected(primaryButtons[primaryIndex].GetComponent<Button>());
+        setButtonColorSelected(secondaryButtons[secondaryIndex].GetComponent<Button>());
+
+        this.lightActionText = lightText;
+        this.heldLight = null;
+        this.nearbyLight = null;
+        this.lightActionText.text = pickUpText;
+        setLightInRange(false);
+
+        isInitalized = true;
+    }
 
     void Update()
     {
 
         if (isInitalized)
         {
+            //Primary Item Selection
             if (Input.GetKeyDown("q"))
             {
                 scrollPrimary(false);
@@ -68,10 +132,30 @@ public class InventoryTracker : MonoBehaviour
                 selectSecondary(5);
             }
 
+            //Light PickUp & Drop
+            if (Input.GetButtonDown("Fire2"))
+            {
+                //Light is held and can be dropped
+                if (heldLight != null)
+                {
+                    dropLight();
+                }
+                //Light is nearby but not held
+                else if(lightInRange)
+                {
+                    pickUpLight();
 
+                }
+                
+            }
+
+            //Light Movement
+            moveLight();
         }
 
     }
+
+    
 
     public void OnTriggerEnter(Collider other)
     {
@@ -93,60 +177,22 @@ public class InventoryTracker : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-
-
-    }
-
-
-    public void Init(GameObject primaryPanel, GameObject secondaryPanel) {
-
-        primaryButtons = new List<GameObject>();
-        secondaryButtons = new List<GameObject>();
-
-        foreach (Button b in primaryPanel.GetComponentsInChildren<Button>()) {
-            addButtonToPanel(b, primaryButtons);
+        if (other.tag.Equals("Light"))
+        {
+            setLightInRange(true);
+            this.nearbyLight = other.gameObject;
         }
+    }
 
-        foreach(Button b in secondaryPanel.GetComponentsInChildren<Button>()) {
-            addButtonToPanel(b, secondaryButtons);
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals("Light"))
+        {
+            setLightInRange(false);
+            this.nearbyLight = null; 
         }
-
-        primarySize = primaryButtons.Count;
-        secondarySize = secondaryButtons.Count;
-
-        primaryWeapons = new List<Item>();
-        secondaryItems = new List<Item>();
-
-
-        primaryIndex = 0;
-        secondaryIndex = 0;
-
-        //Temp Code serving as a placeholder for real items
-
-        Item testPrimary = new Item("Test P1");
-        AddItemToPrimary(testPrimary);
-
-
-        Item testSecondary = new Item("Test S1");
-        AddItemToSecondary(testSecondary);
-
-        SelectedPrimary = primaryWeapons[primaryIndex];
-        SelectedSeconday = secondaryItems[secondaryIndex];
-
-        selectedBlock = ColorBlock.defaultColorBlock;
-        selectedBlock.normalColor = Color.yellow;
-
-        setButtonColorSelected(primaryButtons[primaryIndex].GetComponent<Button>());
-        setButtonColorSelected(secondaryButtons[secondaryIndex].GetComponent<Button>())
-            ;
-        isInitalized = true; 
     }
 
-    private void addButtonToPanel(Button b, List<GameObject> panel) {
-        GameObject buttonObj = b.gameObject;
-        buttonObj.GetComponentInChildren<Text>().text = "Empty";
-        panel.Add(buttonObj);
-    }
 
     public bool AddItemToPrimary(Item newItem)
     {
@@ -172,6 +218,60 @@ public class InventoryTracker : MonoBehaviour
         
 
     }
+
+    //Sets flags indicating the player is near a light object
+    private void setLightInRange(bool onOff)
+    {
+        lightActionText.enabled = onOff;
+        lightInRange = onOff;
+    }
+
+    //Sets light obje9ct triggered by player to player's inventory
+    private void pickUpLight() {
+        this.heldLight = this.nearbyLight;
+        this.lightActionText.text = dropText;
+        activePlayerManager.ToggleShot(false);
+    }
+
+    //Drops the light currently in the players inventory
+    private void dropLight() {
+        this.heldLight = null;
+        activePlayerManager.ToggleShot(true);
+        this.lightActionText.text = pickUpText;
+    }
+
+    //Moves light to stay in front of player
+    private void moveLight()
+    {
+        if (this.heldLight != null)
+        {
+            //Set Initial Light position to the postion of the player
+            Vector3 lightPos = this.transform.position;
+
+            //Get the width of the light and half the width of the player
+            float lightWidth = this.heldLight.transform.localScale.z/2;
+            float playerWidth = this.transform.localScale.z / 2;
+
+            //Multiply the scalar vector of player's position by distance from player's center. 
+            //Result = [X,0,0] where X is disantce in forward direction. 
+            //Add to players position.
+            lightPos += this.transform.forward * (lightWidth + playerWidth);
+
+            //Set new light postion
+            this.heldLight.transform.position = lightPos;
+
+            //Rotate Light
+            this.heldLight.transform.rotation = this.transform.rotation;
+        }
+    }
+
+    private void addButtonToPanel(Button b, List<GameObject> panel)
+    {
+        GameObject buttonObj = b.gameObject;
+        buttonObj.GetComponentInChildren<Text>().text = "Empty";
+        panel.Add(buttonObj);
+    }
+
 
     private int addItemToSet(Item newItem, List<Item> set) {
         set.Add(newItem);
@@ -226,6 +326,7 @@ public class InventoryTracker : MonoBehaviour
         
 
     }
+
 
     private void setButtonColorSelected(Button button) {
         button.colors = selectedBlock;
