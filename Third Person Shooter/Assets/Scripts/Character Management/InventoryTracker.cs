@@ -29,10 +29,16 @@ public class InventoryTracker : MonoBehaviour
     private GameObject heldLight;
     private GameObject nearbyLight;
 
+    private bool isInitalized = false;
+
+    //Strings that display when a player can preform an action on a light object
     private static string pickUpText = "[RC] to Pick Up Light";
     private static string dropText = "[RC] to Drop Light";
+    private static string plugText = "[RC] to Plug in Light";
 
-    private bool isInitalized = false; 
+    //Delegate and variable mapped to player Right-Click Action
+    private delegate void LightAction();
+    private LightAction lightAction;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +95,8 @@ public class InventoryTracker : MonoBehaviour
         this.lightActionText = lightText;
         this.heldLight = null;
         this.nearbyLight = null;
-        this.lightActionText.text = pickUpText;
         setLightInRange(false);
-
+        lightAction = null;
         isInitalized = true;
     }
 
@@ -132,24 +137,14 @@ public class InventoryTracker : MonoBehaviour
                 selectSecondary(5);
             }
 
-            //Light PickUp & Drop
-            if (Input.GetButtonDown("Fire2"))
+            //Set player right click option
+            setLightAction();
+
+            //Carry out right click option 
+            if (Input.GetButtonDown("Fire2") && lightAction != null)
             {
-                //Light is held and can be dropped
-                if (heldLight != null)
-                {
-                    dropLight();
-                }
-                //Light is nearby but not held
-                else if(lightInRange)
-                {
-                    pickUpLight();
-
-                }
-                
+                lightAction();
             }
-
-            //Light Movement
             moveLight();
         }
 
@@ -159,7 +154,7 @@ public class InventoryTracker : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-
+        //Bool set to true if player picks up an inventrory item
         bool itemAdded = false;
 
         if (other.tag == "Primary Item")
@@ -172,11 +167,13 @@ public class InventoryTracker : MonoBehaviour
             itemAdded = AddItemToSecondary(other.GetComponent<BasicItem>().GetItemInfo());
         }
 
+        //Remove item from the map if it is picked up by the player. 
         if (itemAdded)
         {
             Destroy(other.gameObject);
         }
 
+        //Set light object in range if player enters radius
         if (other.tag.Equals("Light"))
         {
             setLightInRange(true);
@@ -186,6 +183,7 @@ public class InventoryTracker : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        //Deselct Light object if player leaves radius
         if (other.tag.Equals("Light"))
         {
             setLightInRange(false);
@@ -220,24 +218,86 @@ public class InventoryTracker : MonoBehaviour
     }
 
     //Sets flags indicating the player is near a light object
+
+    private void setLightAction()
+    {
+        //Light is nearby and the player does not currently hold a light
+        if (lightInRange && heldLight == null)
+        {
+            PluggableLight light = nearbyLight.GetComponent<PluggableLight>();
+
+            //Nearby light is in range of an outlet
+            if (light.OutletInRange)
+            {
+                //Light is not already plugged in
+                if (!light.PluggedIn)
+                {
+                    //Plug In Light Action displays
+                    lightAction = plugInLight;
+                    lightActionText.text = plugText;
+                    lightActionText.enabled = true;
+
+                }
+                else
+                {
+                    //Light is already plugged in - no action can be taken
+                    lightAction = null;
+                    lightActionText.text = string.Empty;
+                    lightActionText.enabled = false;
+                }
+            }
+            //Player is near a light not plugged in - can pick up
+            else 
+            {
+                //Pick Up the Light Action displays
+                lightAction = pickUpLight;
+                lightActionText.text = pickUpText;
+                lightActionText.enabled = true;
+            }
+        }
+        //Player is holding a light
+        else if (heldLight != null)
+        {
+            //Drop the light action displays for player
+            lightAction = dropLight;
+            lightActionText.text = dropText;
+            lightActionText.enabled = true;
+        }
+        //Player is not near a light
+        else
+        {
+            lightActionText.text = string.Empty;
+            lightActionText.enabled = false;
+            lightAction = null;
+        }
+    }
+
+
     private void setLightInRange(bool onOff)
     {
-        lightActionText.enabled = onOff;
         lightInRange = onOff;
     }
 
-    //Sets light obje9ct triggered by player to player's inventory
+    //Sets light object triggered by player to player's inventory
+    //Light Action Delegate
     private void pickUpLight() {
         this.heldLight = this.nearbyLight;
-        this.lightActionText.text = dropText;
         activePlayerManager.ToggleShot(false);
     }
 
     //Drops the light currently in the players inventory
+    //Light Action Delegate
     private void dropLight() {
         this.heldLight = null;
         activePlayerManager.ToggleShot(true);
-        this.lightActionText.text = pickUpText;
+    }
+
+    //Plugs in the light currently in the players inventory
+    //Light Action Delegate
+    private void plugInLight()
+    {
+        PluggableLight light = nearbyLight.GetComponent<PluggableLight>();
+        light.PlugInLight();
     }
 
     //Moves light to stay in front of player
