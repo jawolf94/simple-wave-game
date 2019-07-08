@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameObject playerObject;
     private Player playerInfo;
-    private ExpTracker expTracker;
+    private WillPowerTracker expTracker;
     private InventoryTracker invTracker;
 
     private FireWeapon fireWeapon;
@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         playerInfo.Init(startingHealth, 0, HealthText);
 
         //Set up Exp Tracker
-        expTracker = createComponent<ExpTracker>();
+        expTracker = createComponent<WillPowerTracker>();
         expTracker.Init(experienceText, levelText);
 
         //Set Up Inventroy Tracker
@@ -58,12 +58,8 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public ExpTracker GetExpTracker() {
+    public WillPowerTracker GetExpTracker() {
         return expTracker;
-    }
-
-    public LevelProgress GetLevelProgress() {
-        return expTracker.GetLevelProgress();
     }
 
     public Player GetPlayerInfo() {

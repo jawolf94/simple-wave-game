@@ -83,7 +83,7 @@ public class FireWeapon : MonoBehaviour
             Shootable targetHit = shotHit.collider.GetComponent<Shootable>();
             targetHit.TakeDamage(ShotDamage);
             if (!targetHit.IsAlive) {
-                associatedPlayer.GetExpTracker().ModifyExperience(targetHit.ExperienceReward);
+                associatedPlayer.GetExpTracker().ModifyWillPower(targetHit.ExperienceReward);
             }
         }
         else
