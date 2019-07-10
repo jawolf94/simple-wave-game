@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int startingHealth;
+    public int startingSanity;
 
     public Text experienceText;
     public Text levelText;
-    public Text HealthText;
+    public Text SanityText;
+    public Text LightActionText; 
 
     public GameObject primaryPanel;
     public GameObject secondaryPanel;
 
     private GameObject playerObject;
     private Player playerInfo;
-    private ExpTracker expTracker;
+    private WillPowerTracker expTracker;
     private InventoryTracker invTracker;
+
+    private FireWeapon fireWeapon;
 
 
     // Start is called before the first frame update
@@ -28,13 +31,19 @@ public class PlayerManager : MonoBehaviour
 
         //Add Player
         playerInfo = createComponent<Player>();
-        playerInfo.Init(startingHealth, 0, HealthText);
+        playerInfo.Init(startingSanity, 0, SanityText);
 
-        expTracker = createComponent<ExpTracker>();
+        //Set up Exp Tracker
+        expTracker = createComponent<WillPowerTracker>();
         expTracker.Init(experienceText, levelText);
 
+        //Set Up Inventroy Tracker
         invTracker = createComponent<InventoryTracker>();
-        invTracker.Init(primaryPanel, secondaryPanel);
+        invTracker.Init(this, primaryPanel, secondaryPanel, LightActionText);
+
+        //Get Weapon Controls
+        fireWeapon = GetComponent<FireWeapon>();
+        ToggleShot(true);
     }
 
     private T createComponent<T>() where T: Component 
@@ -49,16 +58,16 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public ExpTracker GetExpTracker() {
+    public WillPowerTracker GetExpTracker() {
         return expTracker;
-    }
-
-    public LevelProgress GetLevelProgress() {
-        return expTracker.GetLevelProgress();
     }
 
     public Player GetPlayerInfo() {
         return playerInfo;
+    }
+
+    public void ToggleShot(bool onOff) {
+        fireWeapon.ShotEnabled = onOff;
     }
 
 }

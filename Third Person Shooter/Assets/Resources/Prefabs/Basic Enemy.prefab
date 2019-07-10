@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 1
-  ExperienceReward: 1
+  WillPowerReward: 1
   Damage: 1
   CoolDown: 1
 --- !u!54 &340892041

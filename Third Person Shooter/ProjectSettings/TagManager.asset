@@ -10,6 +10,8 @@ TagManager:
   - Secondary Item
   - Spawn
   - Game Manager
+  - Light
+  - Outlet
   layers:
   - Default
   - TransparentFX

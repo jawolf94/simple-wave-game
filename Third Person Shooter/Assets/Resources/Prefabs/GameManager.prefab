@@ -47,4 +47,4 @@ MonoBehaviour:
   TimerText: {fileID: 0}
   GameOverText: {fileID: 0}
   WaveTime: 0.33
-  WaveCoolDown: 0.15
+  WaveCoolDown: 0.1
