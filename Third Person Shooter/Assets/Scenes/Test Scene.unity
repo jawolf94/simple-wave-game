@@ -1842,7 +1842,7 @@ GameObject:
   - component: {fileID: 1147703114}
   - component: {fileID: 1147703113}
   m_Layer: 0
-  m_Name: HealthText
+  m_Name: SanityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1900,7 +1900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health: {0}'
+  m_Text: 'Sanity: {0}'
 --- !u!222 &1147703114
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5600,6 +5600,16 @@ PrefabInstance:
       propertyPath: LightActionText
       value: 
       objectReference: {fileID: 1708711680}
+    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: SanityText
+      value: 
+      objectReference: {fileID: 1147703113}
+    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: startingSanity
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604f7bc6f8b593d4b8a26499d92936ba, type: 3}
 --- !u!1001 &6114651734761671462

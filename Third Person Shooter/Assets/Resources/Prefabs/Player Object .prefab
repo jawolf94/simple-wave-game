@@ -31,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808351135942169367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -81,10 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1acc641d4f5e464dadd110252ada0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingSanity: 10
   experienceText: {fileID: 0}
   levelText: {fileID: 0}
-  HealthText: {fileID: 0}
+  SanityText: {fileID: 0}
+  LightActionText: {fileID: 0}
   primaryPanel: {fileID: 0}
   secondaryPanel: {fileID: 0}
 --- !u!120 &5808351135942169352

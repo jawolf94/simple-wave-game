@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int startingHealth;
+    public int startingSanity;
 
     public Text experienceText;
     public Text levelText;
-    public Text HealthText;
+    public Text SanityText;
     public Text LightActionText; 
 
     public GameObject primaryPanel;
@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
 
         //Add Player
         playerInfo = createComponent<Player>();
-        playerInfo.Init(startingHealth, 0, HealthText);
+        playerInfo.Init(startingSanity, 0, SanityText);
 
         //Set up Exp Tracker
         expTracker = createComponent<WillPowerTracker>();
