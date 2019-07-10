@@ -5042,7 +5042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: -4.9999695}
+  m_AnchoredPosition: {x: 5, y: -5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2092885175
@@ -5555,11 +5555,6 @@ PrefabInstance:
       propertyPath: PlayerCam
       value: 
       objectReference: {fileID: 534669904}
-    - target: {fileID: 5808351135942169354, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
         type: 3}
       propertyPath: experienceText
@@ -5572,6 +5567,16 @@ PrefabInstance:
       objectReference: {fileID: 2092230248}
     - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
         type: 3}
+      propertyPath: SanityText
+      value: 
+      objectReference: {fileID: 1147703113}
+    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: LightActionText
+      value: 
+      objectReference: {fileID: 1708711680}
+    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
       propertyPath: primaryPanel
       value: 
       objectReference: {fileID: 1712833595}
@@ -5580,36 +5585,6 @@ PrefabInstance:
       propertyPath: secondaryPanel
       value: 
       objectReference: {fileID: 1905138745}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: healthText
-      value: 
-      objectReference: {fileID: 1147703113}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: HealthText
-      value: 
-      objectReference: {fileID: 1147703113}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: LightInRangeText
-      value: 
-      objectReference: {fileID: 1708711680}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: LightActionText
-      value: 
-      objectReference: {fileID: 1708711680}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: SanityText
-      value: 
-      objectReference: {fileID: 1147703113}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: startingSanity
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604f7bc6f8b593d4b8a26499d92936ba, type: 3}
 --- !u!1001 &6114651734761671462
@@ -5623,11 +5598,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6114651735262807589, guid: 5d5d5a419243e724a964822f41afd521,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6114651735262807587, guid: 5d5d5a419243e724a964822f41afd521,
         type: 3}
@@ -5699,10 +5669,5 @@ PrefabInstance:
       propertyPath: GameOverText
       value: 
       objectReference: {fileID: 1614118500}
-    - target: {fileID: 6114651735262807586, guid: 5d5d5a419243e724a964822f41afd521,
-        type: 3}
-      propertyPath: WaveCoolDown
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d5d5a419243e724a964822f41afd521, type: 3}
