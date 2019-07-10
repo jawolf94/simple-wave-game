@@ -26,7 +26,6 @@ public abstract class Shootable : MonoBehaviour
     public void Start()
     {
         Health = StartingHealth;
-        Debug.Log(StartingHealth);
         function = true;
 
         GameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();

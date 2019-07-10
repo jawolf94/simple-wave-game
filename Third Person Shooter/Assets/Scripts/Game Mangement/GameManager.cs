@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
         }
 
         updateTimerText();
+        checkEndGame();
 
     }
 
@@ -234,6 +235,24 @@ public class GameManager : MonoBehaviour
             Outlet outletScript = outlet.GetComponent<Outlet>();
             outletScript.UnPlugLight();
         }
+    }
+
+    /// <summary>
+    /// A function that checks to see if a player quit the game.
+    /// </summary>
+    private void checkEndGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            endGame();
+        }
+    }
+    /// <summary>
+    /// A function that exits the current game
+    /// </summary>
+    private void endGame()
+    {
+        Application.Quit();
     }
 
 
