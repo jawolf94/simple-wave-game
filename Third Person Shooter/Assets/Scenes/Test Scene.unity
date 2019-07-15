@@ -1409,12 +1409,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4786106fdd299c749a0d6fc9d045fed3, type: 3}
---- !u!20 &534669904 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2745678115895450970, guid: 28fd76f6064c4ee45bee6f392b837194,
-    type: 3}
-  m_PrefabInstance: {fileID: 2745678115439998730}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &590814609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5483,6 +5477,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fd76f6064c4ee45bee6f392b837194, type: 3}
+--- !u!20 &2745678115439998731 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2745678115895450970, guid: 28fd76f6064c4ee45bee6f392b837194,
+    type: 3}
+  m_PrefabInstance: {fileID: 2745678115439998730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5808351136957317915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5550,41 +5550,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5808351135942169353, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: PlayerCam
-      value: 
-      objectReference: {fileID: 534669904}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: experienceText
-      value: 
-      objectReference: {fileID: 1605667799}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: levelText
-      value: 
-      objectReference: {fileID: 2092230248}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
+    - target: {fileID: 1198685866, guid: 604f7bc6f8b593d4b8a26499d92936ba, type: 3}
       propertyPath: SanityText
       value: 
       objectReference: {fileID: 1147703113}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+    - target: {fileID: 2338647186981406677, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: PrimaryPanel
+      value: 
+      objectReference: {fileID: 1712833595}
+    - target: {fileID: 2338647186981406677, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: SecondaryPanel
+      value: 
+      objectReference: {fileID: 1905138745}
+    - target: {fileID: 8007465301590078861, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: PlayerCam
+      value: 
+      objectReference: {fileID: 2745678115439998731}
+    - target: {fileID: 4404392537769590111, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: WillPowerText
+      value: 
+      objectReference: {fileID: 1605667799}
+    - target: {fileID: 4404392537769590111, guid: 604f7bc6f8b593d4b8a26499d92936ba,
+        type: 3}
+      propertyPath: LevelText
+      value: 
+      objectReference: {fileID: 2092230248}
+    - target: {fileID: 725427864678672468, guid: 604f7bc6f8b593d4b8a26499d92936ba,
         type: 3}
       propertyPath: LightActionText
       value: 
       objectReference: {fileID: 1708711680}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: primaryPanel
-      value: 
-      objectReference: {fileID: 1712833595}
-    - target: {fileID: 5808351135942169358, guid: 604f7bc6f8b593d4b8a26499d92936ba,
-        type: 3}
-      propertyPath: secondaryPanel
-      value: 
-      objectReference: {fileID: 1905138745}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604f7bc6f8b593d4b8a26499d92936ba, type: 3}
 --- !u!1001 &6114651734761671462
@@ -5669,5 +5668,10 @@ PrefabInstance:
       propertyPath: GameOverText
       value: 
       objectReference: {fileID: 1614118500}
+    - target: {fileID: 6114651735262807586, guid: 5d5d5a419243e724a964822f41afd521,
+        type: 3}
+      propertyPath: WaveCoolDown
+      value: 0.16666667
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d5d5a419243e724a964822f41afd521, type: 3}
