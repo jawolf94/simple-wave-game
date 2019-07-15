@@ -5,47 +5,48 @@ using UnityEngine.UI;
 
 public class Player : Shootable
 {
-    //Properties
+    //Unity UI set variables
 
     /// <summary>
     /// UI Text field that displays the user's current sanity
     /// </summary>
-    public Text SanityText { get; set; }
+    public Text SanityText;
 
     //Private Variables
+
     /// <summary>
-    /// String which is displayed in the UI Text field
+    /// String which is displayed in the UI Text field.
     /// </summary>
     private string sanityTextString = "Sanity: {0}";
 
     // Start is called before the first frame update
     new void Start()
     {
+        //Call Shootable Start function to initalize health values.
         base.Start();
 
+        //Set sanity UI text to starting health value.
+        updateSanityText(Health);
+
+        //Inform GameManager of new Player.
         GameManager.AddPlayer();
+
+        
     }
 
     /// <summary>
-    /// Function used to initalize the Player object. 
+    /// Function which defines a Player Object's behavior on each frame update.
     /// </summary>
-    /// <param name="sanity">Sanity represents a player's health. This is the starting amount for a new Player</param>
-    /// <param name="willPower">The amount of will power earned from killing the Player</param>
-    /// <param name="sanityText">The UI Text field to display a Player's sanity level</param>
-    public void Init(int sanity, int willPower, Text sanityText)
-    {
-        StartingHealth = sanity;
-        WillPowerReward = willPower;
-        SanityText = sanityText;
-        updateSanityText(StartingHealth); 
-    }
-
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
 
     }
 
+
+    /// <summary>
+    /// Function which defines how to destroy the Player object when killed. 
+    /// </summary>
     public override void DestroyShootable()
     {
         base.DestroyShootable();
@@ -53,7 +54,10 @@ public class Player : Shootable
         Destroy(this.gameObject);
     }
 
-
+    /// <summary>
+    /// Function that applies damage taken to sthe Player Object.
+    /// </summary>
+    /// <param name="damageTaken">The amount of damage to subtract from the Player's health. </param>
     public override void TakeDamage(float damageTaken)
     {
         base.TakeDamage(damageTaken);
