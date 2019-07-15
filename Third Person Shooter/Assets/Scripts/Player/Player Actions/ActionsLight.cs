@@ -189,7 +189,7 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     private void dropLight()
     {
         this.heldLight = null;
-        PlayerController.WeaponActions.ToggleShot(false);
+        PlayerController.WeaponActions.ToggleShot(true);
     }
 
     /// <summary>
