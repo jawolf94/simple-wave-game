@@ -8,20 +8,32 @@ public class PluggableLight : MonoBehaviour
      *All game objects functioning as a light must have this script atteched.
     */
 
-    //Materials set in Unity UI determining the light's appearence when on/off
+    //Pubic vars set by Unity UI
+
+    /// <summary>
+    /// Material set when light is on.
+    /// </summary>
     public Material lightOn;
+
+    /// <summary>
+    /// Material set when light is off. 
+    /// </summary>
     public Material lightOff;
 
-    //Properties
+    //Public Properties
 
-    //True if light is in range of an outlet
+    /// <summary>
+    /// True if light is in range of an outlet
+    /// </summary>
     private bool outletInRange;
     public bool OutletInRange {
         get { return outletInRange; }
         private set { outletInRange = value;}
     }
 
-    //True if light is plugged in to an outlet 
+    /// <summary>
+    /// True if light is plugged in to an outlet 
+    /// </summary>
     private bool pluggedIn;
     public bool PluggedIn
     {
@@ -37,16 +49,31 @@ public class PluggableLight : MonoBehaviour
 
     }
 
-    //Instance of GameManager
+    //Instance variables
+
+    /// <summary>
+    /// Instance of GameManager
+    /// </summary>
     private GameManager GameManager;
 
-    //Renderer to update material
+    /// <summary>
+    /// Renderer to update material
+    /// </summary>
     private Renderer lightRenderer;
-    
-    //GameObject of nearby outlet. Null if not in range 
+
+    /// <summary>
+    /// Light Component to produce scene lighting
+    /// </summary>
+    private Light lightComponent;
+
+    /// <summary>
+    /// GameObject of nearby outlet. Null if not in range 
+    /// </summary>
     private GameObject nearbyOutlet;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         //Find scene's instance of Game Manager
@@ -55,13 +82,20 @@ public class PluggableLight : MonoBehaviour
         //Get attached Renderer component. Lights are initially off
         lightRenderer = GetComponent<Renderer>();
         lightRenderer.material = lightOff;
+
+        //Get Light Compoenent to control scene lighting. Set to Off
+        lightComponent = GetComponent<Light>();
+        lightComponent.enabled = false; 
         
         OutletInRange = false;
         nearbyOutlet = null;
         
     }
 
-
+    /// <summary>
+    /// Called when this object collider overlapps another object's collider area. 
+    /// </summary>
+    /// <param name="other">The other object's collider<</param>
     public void OnTriggerEnter(Collider other)
     {
         //Set light in range if it enters outlet trigger
@@ -72,6 +106,10 @@ public class PluggableLight : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when this object collider leaves another object's collider area. 
+    /// </summary>
+    /// <param name="other">The other objects collider</param>
     public void OnTriggerExit(Collider other)
     {
         //Set light out of ranfe if it exits outlet trigger
@@ -83,7 +121,9 @@ public class PluggableLight : MonoBehaviour
 
     }
 
-    //Sets Light object to a plugged in state
+    /// <summary>
+    /// Sets Light object to a plugged in state
+    /// </summary>
     public void PlugInLight()
     {
         //Light is flagged as plugged in
@@ -91,6 +131,9 @@ public class PluggableLight : MonoBehaviour
 
         //Material set to on material 
         lightRenderer.material = lightOn;
+
+        //Enable Scene lighting
+        lightComponent.enabled = true;
 
         //Update Outlet object
         Outlet o = nearbyOutlet.GetComponent<Outlet>();
@@ -101,10 +144,18 @@ public class PluggableLight : MonoBehaviour
 
     }
 
-    //Disassocaites light from outlet (not plugged in)
+    /// <summary>
+    /// Sets light to off state and disassociates the light with the outlet
+    /// </summary>
     public void UnPlugLight()
     {
-        lightRenderer.material = lightOff; 
+        //Set Light Material to Off Material.
+        lightRenderer.material = lightOff;
+
+        //Turn off scene lighting.
+        lightComponent.enabled = false; 
+        
+        //Set state flags to false.
         pluggedIn = false; 
     }
 }
