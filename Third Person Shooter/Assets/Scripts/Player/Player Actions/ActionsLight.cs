@@ -188,6 +188,12 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     /// </summary>
     private void dropLight()
     {
+        //Reset Light to previous y position
+        Vector3 lightPos = this.heldLight.transform.position;
+        lightPos.y = calcLightWidth(this.heldLight);
+        this.heldLight.transform.position = lightPos;
+        
+        //Remove held light reference and enable weapon control
         this.heldLight = null;
         PlayerController.WeaponActions.ToggleShot(true);
     }
@@ -213,8 +219,8 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
             Vector3 lightPos = this.transform.position;
 
             //Get the width of the light and half the width of the player
-            float lightWidth = this.heldLight.transform.localScale.z / 2;
-            float playerWidth = this.transform.localScale.z / 2;
+            float lightWidth = calcLightWidth(this.heldLight);
+            float playerWidth = calcLightWidth(this.gameObject);
 
             //Multiply the scalar vector of player's position by distance from player's center. 
             //Result = [X,0,0] where X is disantce in forward direction. 
@@ -227,5 +233,14 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
             //Rotate Light
             this.heldLight.transform.rotation = this.transform.rotation;
         }
+    }
+
+    /// <summary>
+    /// Function that calculates half the width of a GameObject.
+    /// </summary>
+    /// <param name="objectToCalc">Object to calculate half width of</param>
+    private float calcLightWidth(GameObject objectToCalc)
+    {
+        return objectToCalc.transform.localScale.z / 2;
     }
 }
