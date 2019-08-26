@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
         }
 
         updateTimerText();
-        checkEndGame();
+        checkIfPlayerStop();
 
     }
 
@@ -240,19 +241,19 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// A function that checks to see if a player quit the game.
     /// </summary>
-    private void checkEndGame()
+    private void checkIfPlayerStop()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            endGame();
+            stopGame();
         }
     }
     /// <summary>
     /// A function that exits the current game
     /// </summary>
-    private void endGame()
+    private void stopGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Assets/Scenes/Main Menu.unity");
     }
 
 
