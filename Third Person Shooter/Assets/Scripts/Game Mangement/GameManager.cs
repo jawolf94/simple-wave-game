@@ -10,7 +10,12 @@ public class GameManager : MonoBehaviour
 
     public Text WaveText;
     public Text TimerText;
-    public Text GameOverText;
+    public Text EndLevelText;
+
+    public GameObject MenuTextContainer;
+
+    public Color winColor;
+    public Color loseColor;
 
     public int EnemyCount { get; private set; }
     public int PlayerCount { get; private set; }
@@ -37,6 +42,11 @@ public class GameManager : MonoBehaviour
     private bool isCoolDown;
 
     private float timer;
+
+    //Strings for UI Display
+
+    private static string loseLevelText = "Game Over";
+    private static string winLevelText = "Victory!";
         
     // Start is called before the first frame update
     void Start()
@@ -58,7 +68,7 @@ public class GameManager : MonoBehaviour
 
 
         isCoolDown = true;
-        GameOverText.enabled = false; 
+        EndLevelText.enabled = false; 
 
     }
 
@@ -68,7 +78,7 @@ public class GameManager : MonoBehaviour
         timer += Time.deltaTime;
 
         if (PlayerCount == 0) {
-            DisplayGameOver();
+            DisplayLevelLose();
         }
 
         if (isCoolDown)
@@ -106,7 +116,6 @@ public class GameManager : MonoBehaviour
 
         updateTimerText();
         checkIfPlayerStop();
-
     }
 
     public void AddEnemy() {
@@ -160,7 +169,33 @@ public class GameManager : MonoBehaviour
         {
              unPlugAllLights();
         }
+
+        if (IsVictory())
+        {
+            DisplayLevelWin();
+        }
        
+    }
+
+    /// <summary>
+    /// Function which checks if the player has completed the level.
+    /// </summary>
+    /// <returns>Returns true if all outlets have been plugged into.</returns>
+    private bool IsVictory()
+    {
+        //Get last outlet in the order
+        Outlet lastOutlet = outlets[outlets.Count].GetComponent<Outlet>();
+
+        //If last outlet is plugged then the level is complete.
+        return lastOutlet.IsPluggedInto;
+    }
+
+    private void DisplayLevelWin()
+    {
+        EndLevelText.text = winLevelText;
+        EndLevelText.color = winColor;
+        EndLevelText.enabled = true;
+        showMenuOptions();
     }
 
 
@@ -175,6 +210,11 @@ public class GameManager : MonoBehaviour
 
             spawnScript.ResetSpawn();
         }
+    }
+
+    private void showMenuOptions()
+    {
+        MenuTextContainer.SetActive(true);
     }
 
     private void startWave() {
@@ -210,8 +250,14 @@ public class GameManager : MonoBehaviour
         TimerText.text = newText;
     }
 
-    private void DisplayGameOver() {
-        GameOverText.enabled = true; 
+    /// <summary>
+    /// Sets and displays losing message on UI.
+    /// </summary>
+    private void DisplayLevelLose() {
+        EndLevelText.text = loseLevelText;
+        EndLevelText.color = loseColor;
+        EndLevelText.enabled = true;
+        showMenuOptions();
     }
 
     //Gets all GameObjects tagged Outlet and adds them to the outlet dictionary by PlugOrder

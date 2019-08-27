@@ -28,7 +28,6 @@ public class ClickableText : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
         text.color = colorOnHover;
         text.fontSize += sizeIncreaseOnHover;
     }
