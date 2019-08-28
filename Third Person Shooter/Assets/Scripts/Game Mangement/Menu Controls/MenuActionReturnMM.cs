@@ -7,6 +7,8 @@ public class MenuActionReturnMM : MonoBehaviour, IMenuAction
 {
     private static string mainMenuPath = "Assets/Scenes/Main Menu.unity";
 
+
+    // Loads main menu when clicked
     public void clickAction()
     {
         SceneManager.LoadScene(mainMenuPath);

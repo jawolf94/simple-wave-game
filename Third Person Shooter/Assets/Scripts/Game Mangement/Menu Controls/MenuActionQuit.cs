@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuActionQuit : MonoBehaviour, IMenuAction
 {
+    // Quit game on click
     public void clickAction()
     {
         Application.Quit();

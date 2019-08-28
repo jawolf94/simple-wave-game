@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuActionReloadScene : MonoBehaviour, IMenuAction
 {
+    // Reloads active scene when clicked
     public void clickAction()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().path);
