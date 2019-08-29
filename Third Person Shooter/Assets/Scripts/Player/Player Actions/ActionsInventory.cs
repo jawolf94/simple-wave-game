@@ -126,7 +126,7 @@ public class ActionsInventory : MonoBehaviour, IPlayerAction
 
         //Sets the color of an item when selected
         selectedBlock = ColorBlock.defaultColorBlock;
-        selectedBlock.normalColor = Color.yellow;
+        selectedBlock.disabledColor = Color.yellow;
 
         //Sets currently selected items
         SelectedPrimary = primaryWeapons[primaryIndex];
@@ -343,7 +343,13 @@ public class ActionsInventory : MonoBehaviour, IPlayerAction
     /// </summary>
     /// <param name="button">Button - The deslected button</param>
     private void setButtonColorDeselected(Button button) {
-        button.colors = ColorBlock.defaultColorBlock;
+
+        //Set unselected block disabled color to normal color
+        ColorBlock unselectedBlock = ColorBlock.defaultColorBlock;
+        unselectedBlock.disabledColor = unselectedBlock.normalColor;
+
+        // Set color block
+        button.colors = unselectedBlock;
     }
 
     
