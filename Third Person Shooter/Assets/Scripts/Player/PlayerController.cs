@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    //Public controller flags
+    public bool inventoryEnabled;
+    
     //Properties
 
     /// <summary>
@@ -76,7 +79,8 @@ public class PlayerController : MonoBehaviour
         IPlayerActions = GetComponents<IPlayerAction>();
 
         //Associate All Player Action Scripts to corresponging property
-        InventoryActions = associateComponent<ActionsInventory>();
+        InventoryActions = inventoryEnabled ? associateComponent<ActionsInventory>() : null;
+ 
         LightActions = associateComponent<ActionsLight>();
         MovementActions = associateComponent<ActionsMovement>();
         WeaponActions = associateComponent<ActionsWeapons>();
@@ -94,37 +98,41 @@ public class PlayerController : MonoBehaviour
         //Execute all IPlayerAction PreUpdate functionality
         preUpdate();
 
-        //Inventory Primary Item Selection Key Mapping
-        if (Input.GetKeyDown(primaryInvScrollDown))
+        // Check for inventory key mappings
+        if (inventoryEnabled)
         {
-            InventoryActions.ScrollPrimary(false);
-        }
-        if (Input.GetKeyDown(primaryInvScrollUp))
-        {
-            InventoryActions.ScrollPrimary(true);
-        }
+            //Inventory Primary Item Selection Key Mapping
+            if (Input.GetKeyDown(primaryInvScrollDown))
+            {
+                InventoryActions.ScrollPrimary(false);
+            }
+            if (Input.GetKeyDown(primaryInvScrollUp))
+            {
+                InventoryActions.ScrollPrimary(true);
+            }
 
-        //Inventory Secondary Item Selection Key Mapping
-        if (Input.GetKeyDown(secondaryInvSelect1))
-        {
-            InventoryActions.SelectSecondary(1);
-        }
-        if (Input.GetKeyDown(secondaryInvSelect2))
-        {
-            InventoryActions.SelectSecondary(2);
-        }
-        if (Input.GetKeyDown(secondaryInvSelect3))
-        {
-            InventoryActions.SelectSecondary(3);
-        }
-        if (Input.GetKeyDown(secondaryInvSelect4))
-        {
-            InventoryActions.SelectSecondary(4);
-        }
-        if (Input.GetKeyDown(secondaryInvSelect5))
-        {
-            InventoryActions.SelectSecondary(5);
-        }
+            //Inventory Secondary Item Selection Key Mapping
+            if (Input.GetKeyDown(secondaryInvSelect1))
+            {
+                InventoryActions.SelectSecondary(1);
+            }
+            if (Input.GetKeyDown(secondaryInvSelect2))
+            {
+                InventoryActions.SelectSecondary(2);
+            }
+            if (Input.GetKeyDown(secondaryInvSelect3))
+            {
+                InventoryActions.SelectSecondary(3);
+            }
+            if (Input.GetKeyDown(secondaryInvSelect4))
+            {
+                InventoryActions.SelectSecondary(4);
+            }
+            if (Input.GetKeyDown(secondaryInvSelect5))
+            {
+                InventoryActions.SelectSecondary(5);
+            }
+        }        
 
         //Light Actions Key Mappings
         if (Input.GetButtonDown(lightPlayerAction))
