@@ -9,14 +9,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5808351135942169366}
-  - component: {fileID: 5808351135942169353}
-  - component: {fileID: 5808351135942169359}
+  - component: {fileID: 1198685866}
+  - component: {fileID: 4215416364833261857}
+  - component: {fileID: 2338647186981406677}
+  - component: {fileID: 725427864678672468}
+  - component: {fileID: 8007465301590078861}
+  - component: {fileID: 4404392537769590111}
+  - component: {fileID: 8612150258960653871}
   - component: {fileID: 5808351135942169352}
   - component: {fileID: 5808351135942169354}
   - component: {fileID: 5808351135942169365}
   - component: {fileID: 5808351135942169355}
   - component: {fileID: 5808351135942169364}
-  - component: {fileID: 5808351135942169358}
   m_Layer: 10
   m_Name: 'Player Object '
   m_TagString: Player
@@ -31,14 +35,68 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808351135942169367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5808351135942169353
+--- !u!114 &1198685866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1bba323f164147baeb7e6616b6f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 10
+  WillPowerReward: 0
+  SanityText: {fileID: 0}
+--- !u!114 &4215416364833261857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1acc641d4f5e464dadd110252ada0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2338647186981406677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046ae81d95509b44aac5db0bdd7818fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrimaryPanel: {fileID: 0}
+  SecondaryPanel: {fileID: 0}
+--- !u!114 &725427864678672468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c2254626f1947419de6d0d87938e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightActionText: {fileID: 0}
+--- !u!114 &8007465301590078861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,7 +112,21 @@ MonoBehaviour:
   PlayerCam: {fileID: 0}
   CamRayLength: 100
   CamTrailingDist: 10
---- !u!114 &5808351135942169359
+--- !u!114 &4404392537769590111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808351135942169367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a41a7a1451f8843ba032bf7e35cec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WillPowerText: {fileID: 0}
+  LevelText: {fileID: 0}
+--- !u!114 &8612150258960653871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,20 +310,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5808351135942169358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5808351135942169367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1acc641d4f5e464dadd110252ada0e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 10
-  experienceText: {fileID: 0}
-  levelText: {fileID: 0}
-  primaryPanel: {fileID: 0}
-  secondaryPanel: {fileID: 0}

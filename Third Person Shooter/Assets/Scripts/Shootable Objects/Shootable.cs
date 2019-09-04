@@ -2,8 +2,13 @@
 
 public abstract class Shootable : MonoBehaviour
 {
-    public float StartingHealth { get; set; }
-    public int ExperienceReward;
+    //Inspector Elements
+    public float StartingHealth;
+
+    /// <summary>
+    /// Will Power reward is the amount of Will Power gained from killing the object
+    /// </summary>
+    public int WillPowerReward;
     public float Health { get; private set; }
     public bool IsAlive
     {
