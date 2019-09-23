@@ -240,61 +240,29 @@ public class GameManager : MonoBehaviour
         PlayerCount--;
     }
 
-    //Check all outlets to determine they are plugged in in the correct order
-    //If not unplug all lights
-    public void CheckPlugOrder()
-    {
-        //Boolean tracking if the correct plug in order was maintained.
-        bool orderPreserved = true;
-
-        //Bool tracking if unplugged light was found
-        bool foundUnplugged = false;
-
-        foreach(int key in outlets.Keys)
-        {
-            Outlet outletScript = outlets[key].GetComponent<Outlet>();
-            
-            //If a an unplugged light has not yet been found and the current outlet has no light
-            //Set unplugged to true
-            if(!foundUnplugged && !outletScript.IsPluggedInto)
-            {
-                foundUnplugged = true; 
-            }
-
-            //If unplugged light was found and the current outlet has a light then order is not preserved
-            if (foundUnplugged && outletScript.IsPluggedInto) {
-                orderPreserved = false;
-                break; 
-            }
-        }
-
-        //If the order was not preserved then unplug all lights
-        if (!orderPreserved)
-        {
-             unPlugAllLights();
-        }
-
-        if (IsVictory())
-        {
-            DisplayLevelWin();
-        }
-       
-    }
-
-    // Private functions
-
     /// <summary>
     /// Function which checks if the player has completed the level.
     /// </summary>
     /// <returns>Returns true if all outlets have been plugged into.</returns>
-    private bool IsVictory()
+    public void IsVictory()
     {
-        //Get last outlet in the order
-        Outlet lastOutlet = outlets[outlets.Count].GetComponent<Outlet>();
+        bool victory = true;
+        foreach(GameObject outlet in outlets.Values)
+        {
+            Outlet outletScript = outlet.GetComponent<Outlet>();
+            if (!outletScript.IsPluggedInto)
+            {
+                victory = false;
+            }
+        }
 
-        //If last outlet is plugged then the level is complete.
-        return lastOutlet.IsPluggedInto;
+        if (victory)
+        {
+            DisplayLevelWin();
+        }
     }
+
+    // Private functions
 
     /// <summary>
     /// Function to set and display win message on UI.
