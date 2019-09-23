@@ -139,8 +139,8 @@ public class PluggableLight : MonoBehaviour
         Outlet o = nearbyOutlet.GetComponent<Outlet>();
         o.PlugInLight(this.gameObject);
 
-        //Game Manager verifies plug order
-        GameManager.CheckPlugOrder();
+        //Game Manager verifies all lights are plugged in
+        GameManager.IsVictory();
 
     }
 
