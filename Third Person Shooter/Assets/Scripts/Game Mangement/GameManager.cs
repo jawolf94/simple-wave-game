@@ -96,9 +96,9 @@ public class GameManager : MonoBehaviour
     private GameObject [] spawnPoints;
 
     /// <summary>
-    /// Sorted dictionary that maps outlet order (int) to outlet (value)
+    /// Dictionary that maps light GameObjects to thier scripts
     /// </summary>
-    private SortedDictionary<int,GameObject> outlets;
+    private Dictionary<GameObject, PluggableLight> lights;
 
     //Constant strings for UI Display.
 
@@ -132,9 +132,9 @@ public class GameManager : MonoBehaviour
         stopSpawn();
         isCoolDown = true;
 
-        //Initialize outlet dictionary to be populated by all GameObjects with the outlet tag
-        outlets = new SortedDictionary<int, GameObject>();
-        setOutletOrder();
+        //Initialize light dictionary to be populated by all GameObjects with the "Light" tag
+        lights = new Dictionary<GameObject, PluggableLight>();
+        findAllLights();
 
         //Hide end level text & menu actions
         EndLevelText.enabled = false; 
@@ -246,16 +246,19 @@ public class GameManager : MonoBehaviour
     /// <returns>Returns true if all outlets have been plugged into.</returns>
     public void IsVictory()
     {
+        // Assume vistory is true
         bool victory = true;
-        foreach(GameObject outlet in outlets.Values)
-        {
-            Outlet outletScript = outlet.GetComponent<Outlet>();
-            if (!outletScript.IsPluggedInto)
+
+        //Loop through all pluggable lights. If any are off, victory is false
+        foreach (PluggableLight light in lights.Values)
+        {            
+            if (!light.IsTurnedOn)
             {
                 victory = false;
             }
         }
 
+        // If the player has won, display victory menu + text
         if (victory)
         {
             DisplayLevelWin();
@@ -377,35 +380,17 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Function which adds all GameObjects tagged Outlet to the outlet ordered dict
+    /// Function which adds all GameObjects tagged "Light" to the light dictionary
     /// </summary>
-    private void setOutletOrder()
+    private void findAllLights()
     {
-        //Find all objects with outlet tag
-        GameObject[] taggedOutlets = GameObject.FindGameObjectsWithTag("Outlet");
+        // Find all objects with light tag.
+        GameObject[] taggedLights = GameObject.FindGameObjectsWithTag("Light");
 
-        // Loop through objects to add them to ordered set
-        foreach(GameObject obj in taggedOutlets)
+        // Loop through objects to add them to the set.
+        foreach(GameObject obj in taggedLights)
         {
-            Outlet newOutlet = obj.GetComponent<Outlet>();
-            if(newOutlet != null)
-            {
-                outlets.Add(newOutlet.PlugOrder, obj);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Function which calls each outlet to unplug associated lights
-    /// </summary>
-    private void unPlugAllLights()
-    {
-        // Loop through all outlsets
-        foreach(GameObject outlet in outlets.Values)
-        {
-            // Get script and unplug
-            Outlet outletScript = outlet.GetComponent<Outlet>();
-            outletScript.UnPlugLight();
+            lights.Add(obj, obj.GetComponent<PluggableLight>());
         }
     }
 

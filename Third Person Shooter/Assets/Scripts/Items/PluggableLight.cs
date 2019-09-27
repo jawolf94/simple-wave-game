@@ -48,6 +48,14 @@ public class PluggableLight : MonoBehaviour
         }
 
     }
+    
+    /// <summary>
+    /// True if light has power and is illuminated.
+    /// </summary>
+    public bool IsTurnedOn {
+        get;
+        private set;
+    }
 
     //Instance variables
 
@@ -76,17 +84,23 @@ public class PluggableLight : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //Find scene's instance of Game Manager
+        // Find scene's instance of Game Manager
         GameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
 
-        //Get attached Renderer component. Lights are initially off
+        // Get attached Renderer component. Lights are initially off
         lightRenderer = GetComponent<Renderer>();
         lightRenderer.material = lightOff;
 
-        //Get Light Compoenent to control scene lighting. Set to Off
+
+        // Get Light Compoenent to control scene lighting. Set to Off
         lightComponent = GetComponent<Light>();
-        lightComponent.enabled = false; 
+        lightComponent.enabled = false;
+
+        // Lights do not start plugged in
+        PluggedIn = false;
+        IsTurnedOn = false;
         
+        // Assume light is not next to an outlet
         OutletInRange = false;
         nearbyOutlet = null;
         
@@ -126,22 +140,44 @@ public class PluggableLight : MonoBehaviour
     /// </summary>
     public void PlugInLight()
     {
-        //Light is flagged as plugged in
+        // Light is flagged as plugged in
         PluggedIn = true;
 
-        //Material set to on material 
-        lightRenderer.material = lightOn;
-
-        //Enable Scene lighting
-        lightComponent.enabled = true;
-
-        //Update Outlet object
+        // Update Outlet object
         Outlet o = nearbyOutlet.GetComponent<Outlet>();
         o.PlugInLight(this.gameObject);
 
-        //Game Manager verifies all lights are plugged in
-        GameManager.IsVictory();
+        // Check if outlet has power
+        if (o.HasPower)
+        {
+            PowerOn();
+        }
+    }
 
+
+    /// <summary>
+    /// Turns on the light and sets object state. Triggers check for victory.
+    /// </summary>
+    public void PowerOn()
+    {
+        IsTurnedOn = true; 
+
+        // Update Light Object to appear on in Game
+        setLightOnMaterial();
+
+        // Game Manager verifies all lights are plugged in
+        GameManager.IsVictory();
+    }
+
+    /// <summary>
+    /// Turns off the light and sets object state
+    /// </summary>
+    public void PowerOff()
+    {
+        IsTurnedOn = false;
+
+        // Update Light Object to appear off in Game
+        setLightOffMaterial();
     }
 
     /// <summary>
@@ -149,13 +185,35 @@ public class PluggableLight : MonoBehaviour
     /// </summary>
     public void UnPlugLight()
     {
+        //Set state flags to false.
+        pluggedIn = false;
+
+        PowerOff();
+    }
+
+    // Private Functions
+
+    /// <summary>
+    /// Sets light material to "On" and enabled scene lighting
+    /// </summary>
+    private void setLightOnMaterial()
+    {
+        //Material set to "ON" material 
+        lightRenderer.material = lightOn;
+
+        //Enable Scene lighting
+        lightComponent.enabled = true;
+    }
+
+    /// <summary>
+    /// Sets light material to "Off" and disabled scene lighting
+    /// </summary>
+    private void setLightOffMaterial()
+    {
         //Set Light Material to Off Material.
         lightRenderer.material = lightOff;
 
         //Turn off scene lighting.
-        lightComponent.enabled = false; 
-        
-        //Set state flags to false.
-        pluggedIn = false; 
+        lightComponent.enabled = false;
     }
 }

@@ -39,6 +39,7 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     /// </summary>
     private bool lightInRange;
 
+
     /// <summary>
     /// GameObject of the light currently held by the Player
     /// </summary>
@@ -49,11 +50,22 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     /// </summary>
     private GameObject nearbyLight;
 
+    /// <summary>
+    /// True if player is near a light swtich
+    /// </summary>
+    private bool switchInRange;
+
+    /// <summary>
+    /// The Game Object of the swtich near the player
+    /// </summary>
+    private GameObject nearbySwitch;
+
 
     //Strings that display when a player can preform an action on a light object
-    private static readonly string pickUpText = "[RC] to Pick Up Light";
-    private static readonly string dropText = "[RC] to Drop Light";
-    private static readonly string plugText = "[RC] to Plug in Light";
+    private readonly string pickUpText = "[RC] to Pick Up Light";
+    private readonly string dropText = "[RC] to Drop Light";
+    private readonly string plugText = "[RC] to Plug in Light";
+    private readonly string switchText = "[RC] to Flip the Switch";
 
 
     // Start is called before the first frame update
@@ -71,7 +83,7 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     /// </summary>
     public void PreAction()
     {
-        setLightAction();
+        setRightClickAction();
     }
 
     /// <summary>
@@ -92,6 +104,11 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
             setLightInRange(true);
             this.nearbyLight = other.gameObject;
         }
+
+        if (other.tag.Equals("Switch"))
+        {
+            setSwitchInRange(true, other.gameObject);
+        }
     }
 
     //Function is called when a player exits a Trigger Collider
@@ -103,14 +120,53 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
             setLightInRange(false);
             this.nearbyLight = null;
         }
+
+        if (other.tag.Equals("Switch"))
+        {
+            setSwitchInRange(false, other.gameObject);
+        }
     }
 
   
     /// <summary>
     /// Sets the function a player can perform when a player is in range of a light.
-    /// Function can either be pickUpLight(), dropLight(), plugInLight()
+    /// Function can either be pickUpLight(), dropLight(), plugInLight(), toggleSwitch()
     /// </summary>
-    private void setLightAction()
+    private void setRightClickAction()
+    {
+        //Set switch actions then light actions
+        //Since all are [RC] controls, swtich actions are set first so light actions take priority.
+        //The player should be able to move a light before being able to toggle a switch since switches cannot be moved. 
+
+        setSwitchActions();
+        setLightActions();
+    }
+
+    /// <summary>
+    /// Sets the Player's Right Click function for Switches based on their current proximity and the switch state.
+    /// </summary>
+    private void setSwitchActions()
+    {
+        if (switchInRange)
+        {
+            // Switch is nearby, enable RC action. 
+            PerformLightAction = toggleSwitch;
+            LightActionText.text = switchText;
+            LightActionText.enabled = true;
+        }
+        else
+        {
+            // No seitch nearby, disable RC action
+            PerformLightAction = null;
+            LightActionText.text = string.Empty;
+            LightActionText.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Sets the Player's Right Click function for Lights based on their current proximity and held state. 
+    /// </summary>
+    private void setLightActions()
     {
         //Light is nearby and the player does not currently hold a light
         if (lightInRange && heldLight == null)
@@ -129,7 +185,7 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
                     LightActionText.enabled = true;
 
                 }
-                else
+                else if(!LightActionText.text.Equals(switchText))
                 {
                     //Light is already plugged in - no action can be taken
                     PerformLightAction = null;
@@ -155,7 +211,7 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
             LightActionText.enabled = true;
         }
         //Player is not near a light
-        else
+        else if(!LightActionText.text.Equals(switchText))
         {
             LightActionText.text = string.Empty;
             LightActionText.enabled = false;
@@ -173,13 +229,24 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     }
 
     /// <summary>
+    /// Sets nearbySwitch Game Object to swtichObject if inRange is true. Otherwise neabySwtich becomes null. 
+    /// </summary>
+    /// <param name="inRange">Bool - True if setting a new nearby swtich.</param>
+    /// <param name="swtichObject">GameObejct - The new switch object.</param>
+    private void setSwitchInRange(bool inRange, GameObject switchObject)
+    {
+        nearbySwitch = inRange ? switchObject : null;
+        switchInRange = inRange;
+    }
+
+    /// <summary>
     /// Light Action Delegate.
     /// Sets light object triggered by player to player's inventory 
     /// </summary>
     private void pickUpLight()
     {
         this.heldLight = this.nearbyLight;
-       PlayerController.WeaponActions.ToggleShot(false);
+        PlayerController.WeaponActions.ToggleShot(false);
     }
 
     /// <summary>
@@ -206,6 +273,16 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     {
         PluggableLight light = nearbyLight.GetComponent<PluggableLight>();
         light.PlugInLight();
+    }
+
+    /// <summary>
+    /// Light Action Delegate.
+    /// Toggles the SwitchOn of nearbySwitch
+    /// </summary>
+    private void toggleSwitch()
+    {
+        Switch switchScript = nearbySwitch.GetComponent<Switch>();
+        switchScript.ToggleSwitch();
     }
 
     /// <summary>
