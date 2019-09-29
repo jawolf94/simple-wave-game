@@ -12,6 +12,7 @@ TagManager:
   - Game Manager
   - Light
   - Outlet
+  - Switch
   layers:
   - Default
   - TransparentFX
