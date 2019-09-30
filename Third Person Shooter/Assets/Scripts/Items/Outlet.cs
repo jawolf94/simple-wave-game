@@ -24,21 +24,6 @@ public class Outlet : MonoBehaviour
     }
 
     /// <summary>
-    /// Switch Connected to this outlet.
-    /// </summary>
-    private GameObject connectedSwitch;
-    private Switch connectedSwitchScript;
-    public GameObject ConnectedSwitch {
-
-        get { return connectedSwitch; }
-
-        set {
-            connectedSwitch = value;
-            connectedSwitchScript = ConnectedSwitch.GetComponent<Switch>();
-        }
-    }
-
-    /// <summary>
     /// Returns true if power is supplied to the outlet
     /// </summary>
     public bool HasPower
@@ -56,6 +41,34 @@ public class Outlet : MonoBehaviour
         }
 
         private set { }
+    }
+
+    /// <summary>
+    /// Returns true if a light is connected and has power.
+    /// </summary>
+    public bool IsLightOn
+    {
+        get
+        {
+            return IsPluggedInto && HasPower;
+        }
+
+        private set { }
+    }
+
+    /// <summary>
+    /// Switch Connected to this outlet.
+    /// </summary>
+    private GameObject connectedSwitch;
+    private Switch connectedSwitchScript;
+    public GameObject ConnectedSwitch {
+
+        get { return connectedSwitch; }
+
+        set {
+            connectedSwitch = value;
+            connectedSwitchScript = ConnectedSwitch.GetComponent<Switch>();
+        }
     }
 
 
@@ -128,4 +141,5 @@ public class Outlet : MonoBehaviour
         // Set Properties and private vars to refelct unplugged state.
         pluggedInLight = null;
     }
+
 }
