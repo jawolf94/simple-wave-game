@@ -1856,6 +1856,11 @@ PrefabInstance:
       propertyPath: ControlOutlets.Array.data[0]
       value: 
       objectReference: {fileID: 17491066}
+    - target: {fileID: 4956135425481756711, guid: 6b915954fc7d6284494f9ee723f54e33,
+        type: 3}
+      propertyPath: Range
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b915954fc7d6284494f9ee723f54e33, type: 3}
 --- !u!4 &1129896749 stripped
@@ -3802,7 +3807,7 @@ PrefabInstance:
     - target: {fileID: 4956135425481756710, guid: 6b915954fc7d6284494f9ee723f54e33,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -13.35
       objectReference: {fileID: 0}
     - target: {fileID: 4956135425481756710, guid: 6b915954fc7d6284494f9ee723f54e33,
         type: 3}
@@ -3812,7 +3817,7 @@ PrefabInstance:
     - target: {fileID: 4956135425481756710, guid: 6b915954fc7d6284494f9ee723f54e33,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25
+      value: 26.42
       objectReference: {fileID: 0}
     - target: {fileID: 4956135425481756710, guid: 6b915954fc7d6284494f9ee723f54e33,
         type: 3}
@@ -3874,6 +3879,16 @@ PrefabInstance:
       propertyPath: ControlOutlets.Array.data[1]
       value: 
       objectReference: {fileID: 2092885175}
+    - target: {fileID: 4956135425481756711, guid: 6b915954fc7d6284494f9ee723f54e33,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956135425481756711, guid: 6b915954fc7d6284494f9ee723f54e33,
+        type: 3}
+      propertyPath: Range
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b915954fc7d6284494f9ee723f54e33, type: 3}
 --- !u!4 &1788028963 stripped
@@ -4415,6 +4430,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024539049}
   m_CullTransparentMesh: 0
+--- !u!1 &2040874409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4956135425481756709, guid: 6b915954fc7d6284494f9ee723f54e33,
+    type: 3}
+  m_PrefabInstance: {fileID: 1788028962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2040874410
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040874409}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2046451683
 GameObject:
   m_ObjectHideFlags: 0
