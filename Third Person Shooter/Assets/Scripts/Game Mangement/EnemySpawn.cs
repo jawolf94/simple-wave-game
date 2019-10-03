@@ -24,6 +24,13 @@ public class EnemySpawn : MonoBehaviour
     public GameObject Enemy;
 
     /// <summary>
+    /// Indicates the radius around the spawn in which the enemies can be produced.
+    /// </summary>
+    public float Range;
+
+    // Public Properties
+
+    /// <summary>
     /// True if spawn is producing units
     /// </summary>
     public bool IsEnabled { get; private set; }
@@ -40,7 +47,7 @@ public class EnemySpawn : MonoBehaviour
     /// </summary>
     private float timer;
     
-
+    // Start us called before the first frame.
     void Start()
     {
         timer = 0f;
@@ -85,7 +92,22 @@ public class EnemySpawn : MonoBehaviour
         if (timer >= SpawnTime && IsEnabled)
         {
             timer = 0f;
-            Instantiate(Enemy, transform);
+
+            // Get Random point inside range and set height.
+            Vector2 xzCoord = getXZCooridnates();
+
+            //Debug.Log(xzCoord);
+
+            float yScale = (float) System.Math.Round(Enemy.transform.localScale.y, 2);
+            float y = Enemy.transform.localScale.y / 2.00f;
+
+            Vector3 placementDifferential = new Vector3(xzCoord[0],0,xzCoord[1]);
+
+            Vector3 position = this.transform.position + placementDifferential;
+            position.y = y;
+
+            // Place enemy on the map.
+            Instantiate(Enemy, position, this.transform.rotation);
         }
     }
 
@@ -123,6 +145,15 @@ public class EnemySpawn : MonoBehaviour
         {
             ResetSpawn();
         }
+    }
+
+    /// <summary>
+    /// Returns a random set of cooridnates inside a unit cicle multiplied by the Spawn's range.
+    /// </summary>
+    /// <returns></returns>
+    private Vector2 getXZCooridnates()
+    {
+        return Random.insideUnitCircle * Range;
     }
 }
 
