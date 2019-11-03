@@ -17,6 +17,13 @@ Third Person Shooter/Temp/
 # TextMesh Pro files
 Third Person Shooter/Assets/TextMesh*Pro/
 
+# Exclude UniGLTF Files
+Third Person Shooter/Assets/UniGLTF/
+Third Person Shooter/Assets/UniGLTF*
+
+# Exclude Unity UI Framework
+Third Person Shooter/UIElementsSchema/
+
 # Visual Studio cache directory
 .vs/
 

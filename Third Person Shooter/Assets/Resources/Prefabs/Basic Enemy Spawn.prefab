@@ -38,14 +38,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4956135425481756709}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6808eb985c78f094d8c7e607cec93cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ControlOutlets:
   - {fileID: 0}
-  - {fileID: 0}
-  SpawnTime: 2
+  SpawnTime: 4
   Enemy: {fileID: 635142328126580739, guid: db37940c5e9e39644a3f28df691dba41, type: 3}
-  Range: 7
+  Range: 0

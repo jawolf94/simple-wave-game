@@ -45,6 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaveText: {fileID: 0}
   TimerText: {fileID: 0}
-  GameOverText: {fileID: 0}
+  EndLevelText: {fileID: 0}
+  winColor: {r: 0.09411765, g: 1, b: 0, a: 1}
+  loseColor: {r: 1, g: 0, b: 0, a: 1}
+  MenuTextContainer: {fileID: 0}
   WaveTime: 0.33
-  WaveCoolDown: 0.1
+  WaveCoolDown: 0.16666667

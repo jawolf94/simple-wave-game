@@ -257,7 +257,10 @@ public class ActionsLight : MonoBehaviour, IPlayerAction
     {
         //Reset Light to previous y position
         Vector3 lightPos = this.heldLight.transform.position;
-        lightPos.y = calcLightWidth(this.heldLight);
+
+        // Calculate position off floor based on player position
+        float groundYValue = transform.position.y - calcLightWidth(this.gameObject);
+        lightPos.y = groundYValue + calcLightWidth(this.heldLight);
         this.heldLight.transform.position = lightPos;
         
         //Remove held light reference and enable weapon control
