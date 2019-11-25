@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Test Interactable
+  m_Name: Light Switch Material
   m_Shader: {fileID: -6465566751694194690, guid: 140fb5e6f9e76e943a7f9a6c41c5def9,
     type: 3}
   m_ShaderKeywords: 
@@ -79,7 +79,7 @@ Material:
     m_Colors:
     - Color_4497BC94: {r: 0.08611512, g: 1, b: 0, a: 0}
     - Color_4AE0AA54: {r: 1, g: 1, b: 1, a: 0}
-    - Color_E491ADED: {r: 0.34117648, g: 0.3372549, b: 0.3764706, a: 0}
+    - Color_E491ADED: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
