@@ -1,3 +1,5 @@
+Note: This game is in alpha. User expereince optimizations and game play balances are largely unimplemented at this time.
+
 Game Concept:
 
 You are trapped in a nightmare filled with monsters. The only way to escape is to turn on the lights to escape the dream. 
@@ -45,8 +47,9 @@ Controls:
 Download and Play:
 
 	1) Download the zip file at this link: 
-	2) Once download is complete unzip folder. All files must be unzipped to target folder.
-	3) Click exe file to launch.
+			https://drive.google.com/file/d/1sXJgit5wB-zNbHMVOViBQwJReJkbfc_h/view?usp=sharing
+	2) Once your download is complete, unzip the WaveSurvivalGame folder. All contents must be unzipped to the target destination.
+	3) Double click the "Wave Survival Game" application to launch.
 
 
 Solution Set for Level 1:
