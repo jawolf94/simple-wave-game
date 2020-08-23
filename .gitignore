@@ -2,20 +2,27 @@
 
 # This .gitignore file should be placed at the root of your Unity project directory
 
-Third Person Shooter/Builds/
-Third Person Shooter/Library/
-Third Person Shooter/Logs/
-Third Person Shooter/obj/
-Third Person Shooter/Temp/
+Wave Survival Game/Builds/
+Wave Survival Game/Library/
+Wave Survival Game/Logs/
+Wave Survival Game/obj/
+Wave Survival Game/Temp/
 
 # Never ignore Asset meta data
-!Third Person Shooter/Assets/**/*.meta
+!Wave Survival Game/Assets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /Assets/AssetStoreTools*
 
 # TextMesh Pro files
-Third Person Shooter/Assets/TextMesh*Pro/
+Wave Survival Game/Assets/TextMesh*Pro/
+
+# Exclude UniGLTF Files
+Wave Survival Game/Assets/UniGLTF/
+Wave Survival Game/Assets/UniGLTF*
+
+# Exclude Unity UI Framework
+Wave Survival Game/UIElementsSchema/
 
 # Visual Studio cache directory
 .vs/
