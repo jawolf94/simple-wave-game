@@ -1,11 +1,17 @@
-Note: This game is in alpha. User expereince optimizations and game play balances are largely unimplemented at this time.
-
 Game Concept:
 
 You are trapped in a nightmare filled with monsters. The only way to escape is to turn on the lights to escape the dream. 
 Until all the lights are turned on the monsters will keep coming.
 
 Each level will get progressively harder and more dream-like.
+
+--
+Note: This game is in alpha. User expereince optimizations and game play balances are largely unimplemented at this time.
+
+All C# code written for this game can be found under Wave Survival Game/Assets/Scripts in the Unity3D Assets repo.
+
+--
+
 
 Game Play Mechanics:
 
