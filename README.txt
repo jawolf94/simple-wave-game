@@ -6,7 +6,7 @@ Until all the lights are turned on the monsters will keep coming.
 Each level will get progressively harder and more dream-like.
 
 --
-Note: This game is in alpha. User expereince optimizations and game play balances are largely unimplemented at this time.
+Note: This game contains only a demo level. User expereince optimizations and game play balances are largely unimplemented at this time.
 
 All C# code written for this game can be found under Wave Survival Game/Assets/Scripts in the Unity3D Assets repo.
 
@@ -20,7 +20,7 @@ Game Play Mechanics:
         * The player has experience and levels. Experience is represented by Will Power.
         * Monsters are red cubes. If a monster touches the player they will lose sanity. If the player's sanity reaches 0 - they die. 
         * The player can shoot monsters to kill them. 
-        * Monsters spawn in waves with rest (cooldown) periods in between. In the demo level they only last for a few seconds.
+        * Monsters spawn in waves with rest (cooldown) periods in between. In the demo level both only last for a few seconds.
         * A wave will not end if monsters are remaining.
         * Lights are dark blue cubes.
         * The player must pick them up and move them near outlets (black rectangles on the wall).
@@ -52,8 +52,7 @@ Controls:
 
 Download and Play:
 
-	1) Download the zip file at this link: 
-			https://drive.google.com/file/d/1sXJgit5wB-zNbHMVOViBQwJReJkbfc_h/view?usp=sharing
+	1) Download the zip file at this link: https://drive.google.com/file/d/1sXJgit5wB-zNbHMVOViBQwJReJkbfc_h/view?usp=sharing
 	2) Once your download is complete, unzip the WaveSurvivalGame folder. All contents must be unzipped to the target destination.
 	3) Double click the "Wave Survival Game" application to launch.
 
